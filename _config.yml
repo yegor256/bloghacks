@@ -32,8 +32,3 @@ sass:
   style: compressed
   deploy_style: compressed
   compile_in_place: false
-
-# http://jch.penibelst.de/
-compress_html:
-  clippings: [div, p, ul, td, h1, h2]
-  comments: all
