@@ -5,6 +5,9 @@
 /* see https://fonts.google.com/ */
 @import 'https://fonts.googleapis.com/css?family=Lora';
 
+.gray { color: lighten(black, 50); }
+.center { text-align: center; }
+
 * {
   margin: 0;
   padding: 0;
@@ -26,8 +29,7 @@ section {
 }
 
 header {
-  margin-bottom: 2em;
-  text-align: center;
+  @extend .center;
   input {
     border: 1px solid black;
     padding: .2em .6em;
@@ -47,6 +49,7 @@ header {
 }
 
 article {
+  margin: 2em 0;
   h1 {
     font-weight: bold;
     font-size: 1.8em;
@@ -65,10 +68,9 @@ article {
 }
 
 footer {
-  color: lighten(black, 50);
+  @extend .gray;
+  @extend .center;
   font-size: .8em;
-  margin-top: 2em;
-  text-align: center;
 }
 
 code {
@@ -78,3 +80,4 @@ code {
 .disqus {
   margin-top: 3em;
 }
+

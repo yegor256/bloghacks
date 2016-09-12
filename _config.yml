@@ -8,3 +8,32 @@ url: "http://bloghacks.yegor256.com"
 twitter_username: yegor256
 github_username: yegor256
 markdown: kramdown
+author:
+  name: "Yegor Bugayenko"
+  email: me@yegor256.com
+encoding: utf-8
+timezone: America/San_Francisco
+
+gems:
+  - jekyll-feed
+  - jekyll-paginate
+  - jekyll-sitemap
+
+paginate: 8
+paginate_path: "p/:num"
+excerpt_separator: <!--more-->
+
+feed:
+  title: bloghacks.yegor256.com
+  subtitle: 256 Bloghacks Demo
+  path: rss.xml
+
+sass:
+  style: compressed
+  deploy_style: compressed
+  compile_in_place: false
+
+# http://jch.penibelst.de/
+compress_html:
+  clippings: [div, p, ul, td, h1, h2]
+  comments: all
