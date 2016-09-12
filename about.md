@@ -4,7 +4,7 @@ title: About
 permalink: /about.html
 ---
 
-Yegor Bugayenko (@yegor) is the author of this
+Yegor Bugayenko ([`@yegor256`](https://github.com/yegor256)) is the author of this
 website. This is not a real site, but only a demo, to
 show you how [Jekyll](https://jekyllrb.com/) works
 with [GitHub Pages](https://pages.github.com/).
