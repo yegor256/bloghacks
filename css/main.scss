@@ -1,0 +1,68 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+@charset "utf-8";
+/* see https://fonts.google.com/ */
+@import 'https://fonts.googleapis.com/css?family=Lora';
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-family: 'Lora', 'Times New Roman', serif;
+  font-size: 18px;
+}
+
+body {
+  padding: 2em;
+}
+
+section {
+  margin-left: auto;
+  margin-right: auto;
+  width: 640px;
+  max-width: 100%;
+}
+
+header {
+  margin-bottom: 2em;
+  text-align: center;
+  input {
+    border: 1px solid black;
+    padding: .1em .4em;
+    max-width: 100%;
+  }
+  .photo {
+    width: 128px;
+    height: 128px;
+  }
+  ul {
+    li {
+      display: inline;
+      margin-right: .4em;
+    }
+  }
+}
+
+article {
+  h1 {
+    font-weight: bold;
+    font-size: 1.8em;
+  }
+  h2 {
+    font-weight: bold;
+    font-size: 1.4em;
+  }
+  p, h1, h2, h3, ul, ol {
+    margin-top: .5em;
+    margin-bottom: .5em;
+  }
+  ul, ol {
+    margin-left: 3em;
+  }
+}
+
+.disqus {
+  margin-top: 3em;
+}

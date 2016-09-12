@@ -1,0 +1,10 @@
+title: 256 Bloghacks Demo
+email: me@yegor256.com
+description: >
+  This site is a static blog for Jekyll and GitHub Pages,
+  a demo for "256 Bloghacks" book by Yegor Bugayenko
+baseurl: ""
+url: "http://bloghacks.yegor256.com"
+twitter_username: yegor256
+github_username: yegor256
+markdown: kramdown
