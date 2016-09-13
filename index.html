@@ -5,7 +5,7 @@ title: "256 Bloghacks Demo"
 
 {% for post in paginator.posts %}
   <article>
-    {{ post.date | date: "%b %-d, %Y" }}
+    {{ post.date | date: "%B %-d, %Y" }}
     <h1>{{ post.title }}</h1>
     {{ post.excerpt }}
     <a href="{{ post.url | prepend: site.baseurl }}">Read...</a>
