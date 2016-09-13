@@ -18,7 +18,8 @@ end
 
 desc "Build Jekyll site"
 task :build do
-  system("jekyll build")
+  system('jekyll build')
+  raise 'Jekyll failed' unless $?.exitstatus == 0
 end
 
 desc "Check the existence of all critical pages"
