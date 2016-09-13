@@ -30,6 +30,7 @@ desc 'Build Jekyll site'
 task :build do
   system('jekyll build')
   fail 'Jekyll failed' unless $CHILD_STATUS.success?
+  done 'Jekyll site generated without issues'
 end
 
 desc 'Check the existence of all critical pages'
