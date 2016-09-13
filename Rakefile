@@ -5,6 +5,7 @@ require 'rake'
 require 'tempfile'
 require 'rake/clean'
 require 'scss_lint/rake_task'
+require 'w3c_validators'
 
 task default: [:clean, :build, :scss_lint, :pages]
 
@@ -37,5 +38,26 @@ task :pages => [:build] do
   ].each do |p|
     file = "_site/#{p}"
     raise "Page #{file} is not found" unless File.exists? file
+  end
+end
+
+desc "Validate a few pages for W3C compliance"
+# It doesn't work now, because of: https://github.com/alexdunae/w3c_validators/issues/16
+task :w3c => [:build] do
+  include W3CValidators
+  validator = MarkupValidator.new
+  [
+    'index.html',
+    '2016/09/12/first-post.html'
+  ].each do |p|
+    file = "_site/#{p}"
+    results = validator.validate_file(file)
+    if results.errors.length > 0
+      results.errors.each do |err|
+        puts err.to_s
+      end
+      raise "Page #{file} is not W3C compliant"
+    end
+    puts "Page #{p} is W3C compliant"
   end
 end
