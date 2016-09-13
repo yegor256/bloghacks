@@ -48,13 +48,14 @@ header {
     width: 100px;
   }
 
-  ul {
+  form,
+  nav {
     margin: .4em 0;
+  }
 
-    li {
-      display: inline;
-      margin-right: .4em;
-    }
+  ul li
+    display: inline;
+    margin-right: .4em;
   }
 }
 
