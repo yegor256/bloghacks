@@ -13,6 +13,10 @@ require 'net/http'
 
 task default: [:clean, :build, :scss_lint, :pages, :spell, :ping, :rubocop]
 
+def done(msg)
+  puts msg + "\n\n"
+end
+
 desc 'Lint SASS sources'
 SCSSLint::RakeTask.new do |t|
   f = Tempfile.new(['bloghacks-', '.scss'])
@@ -45,7 +49,7 @@ task pages: [:build] do
     fail "Page #{file} is not found" unless File.exist? file
     puts "#{file}: OK"
   end
-  puts "All files are in place\n"
+  done 'All files are in place'
 end
 
 desc 'Validate a few pages for W3C compliance'
@@ -67,7 +71,7 @@ task w3c: [:build] do
     end
     puts "#{p}: OK"
   end
-  puts "HTML is W3C compliant\n"
+  done 'HTML is W3C compliant'
 end
 
 desc 'Check spelling in all HTML pages'
@@ -89,7 +93,7 @@ task spell: [:build] do
     fail "Typos at #{f}:\n#{stdout}" unless stdout.empty?
     puts "#{f}: OK"
   end
-  puts "No spelling errors\n"
+  done 'No spelling errors'
 end
 
 desc 'Ping all foreign links'
@@ -106,7 +110,7 @@ task ping: [:build] do
     puts "#{uri}: #{data.code}"
     fail "URI #{uri} is not OK" unless data.code == '200'
   end
-  puts "All links are valid\n"
+  done 'All links are valid'
 end
 
 desc 'Run RuboCop on all Ruby files'
