@@ -1,20 +1,27 @@
 ---
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
-@charset "utf-8";
+@charset "utf-8"
 /* see https://fonts.google.com/ */
-@import 'https://fonts.googleapis.com/css?family=Lora';
+@import 'https://fonts.googleapis.com/css?family=Lora'
 
-.gray { color: lighten(black, 50); }
-.center { text-align: center; }
+$black: #000
+
+%gray { color: lighten($black, 50); }
+
+.gray { @extend %gray; }
+
+%center { text-align: center; }
+
+.center { @extend %center; }
 
 * {
-  margin: 0;
-  padding: 0;
   border: 0;
   box-sizing: border-box;
   font-family: 'Lora', 'Times New Roman', serif;
   font-size: 18px;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -24,23 +31,27 @@ body {
 section {
   margin-left: auto;
   margin-right: auto;
-  width: 640px;
   max-width: 100%;
+  width: 640px;
 }
 
 header {
-  @extend .center;
+  @extend %center;
+
   input {
-    border: 1px solid black;
-    padding: .2em .6em;
+    border: 1px solid $black;
     max-width: 100%;
+    padding: .2em .6em;
   }
+
   .photo {
-    width: 100px;
     height: 100px;
+    width: 100px;
   }
+
   ul {
     margin: .4em 0;
+
     li {
       display: inline;
       margin-right: .4em;
@@ -50,31 +61,41 @@ header {
 
 article {
   margin: 4em 0;
+
   h1 {
-    font-weight: bold;
     font-size: 1.8em;
-  }
-  h2 {
     font-weight: bold;
+  }
+
+  h2 {
     font-size: 1.4em;
+    font-weight: bold;
   }
-  p, h1, h2, h3, ul, ol {
-    margin-top: .5em;
+
+  p,
+  h1,
+  h2,
+  h3,
+  ul,
+  ol {
     margin-bottom: .5em;
+    margin-top: .5em;
   }
-  ul, ol {
+
+  ul,
+  ol {
     margin-left: 3em;
   }
 }
 
 footer {
-  @extend .gray;
-  @extend .center;
+  @extend %gray;
+  @extend %center;
   font-size: .8em;
 }
 
 code {
-  background-color: lighten(black, 90);
+  background-color: lighten($black, 90);
   border-radius: .2em;
   font-family: monospace;
   padding: .1em .2em;
