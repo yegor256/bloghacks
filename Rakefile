@@ -9,8 +9,9 @@ require 'w3c_validators'
 require 'nokogiri'
 require 'rubocop/rake_task'
 require 'English'
+require 'net/http'
 
-task default: [:clean, :build, :scss_lint, :pages, :spell, :rubocop]
+task default: [:clean, :build, :scss_lint, :pages, :spell, :ping, :rubocop]
 
 desc 'Lint SASS sources'
 SCSSLint::RakeTask.new do |t|
@@ -42,8 +43,9 @@ task pages: [:build] do
   ].each do |p|
     file = "_site/#{p}"
     fail "Page #{file} is not found" unless File.exist? file
-    puts "Page #{file} is in place"
+    puts "#{file}: OK"
   end
+  puts "All files are in place\n"
 end
 
 desc 'Validate a few pages for W3C compliance'
@@ -63,8 +65,9 @@ task w3c: [:build] do
       end
       fail "Page #{file} is not W3C compliant"
     end
-    puts "Page #{p} is W3C compliant"
+    puts "#{p}: OK"
   end
+  puts "HTML is W3C compliant\n"
 end
 
 desc 'Check spelling in all HTML pages'
@@ -84,8 +87,26 @@ task spell: [:build] do
       | aspell -a --lang=en_US -W 2 --ignore-case -p ./_rake/aspell.en.pws \
       | grep ^\\&`
     fail "Typos at #{f}:\n#{stdout}" unless stdout.empty?
-    puts "Spell check passed, no typos at #{f}"
+    puts "#{f}: OK"
   end
+  puts "No spelling errors\n"
+end
+
+desc 'Ping all foreign links'
+task ping: [:build] do
+  links = Dir['_site/**/*.html'].reduce([]) do |array, f|
+    array + Nokogiri::HTML(File.read(f)).xpath(
+      '//a/@href[starts-with(.,"http://") or starts-with(.,"https://")]'
+    ).to_a.map(&:to_s)
+  end.uniq
+  links.map { |u| URI.parse(u) }.each do |uri|
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true if uri.port == 443
+    data = http.head(uri.request_uri)
+    puts "#{uri}: #{data.code}"
+    fail "URI #{uri} is not OK" unless data.code == '200'
+  end
+  puts "All links are valid\n"
 end
 
 desc 'Run RuboCop on all Ruby files'
