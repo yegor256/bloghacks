@@ -4,7 +4,7 @@ require 'rake'
 require 'tempfile'
 require 'rake/clean'
 require 'scss_lint/rake_task'
-task default: [:clean, :build, :scss_lint]
+task default: [:clean, :build, :scss_lint, :pages]
 
 desc "Lint SASS sources"
 SCSSLint::RakeTask.new do |t|
@@ -17,4 +17,17 @@ end
 desc "Build Jekyll site"
 task :build do
   system("jekyll build")
+end
+
+desc "Check the existence of all critical pages"
+task :pages => [:build] do
+  [
+    'robot.txt',
+    'css/main.css',
+    'about.html',
+    '2016/09/12/first-post.html'
+  ].each do |p|
+    file = "_site/#{p}"
+    raise "Page #{file} is not found" unless File.exists? file
+  end
 end
