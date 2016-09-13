@@ -13,6 +13,7 @@ author:
   email: me@yegor256.com
 encoding: utf-8
 timezone: America/San_Francisco
+permalink: :year/:month/:day/:title.html
 
 gems:
   - jekyll-feed
