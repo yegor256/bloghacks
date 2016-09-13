@@ -22,7 +22,7 @@ end
 desc "Check the existence of all critical pages"
 task :pages => [:build] do
   [
-    'robot.txt',
+    'robots.txt',
     'css/main.css',
     'about.html',
     '2016/09/12/first-post.html'
