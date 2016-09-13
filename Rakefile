@@ -24,7 +24,12 @@ task :pages => [:build] do
   [
     'robots.txt',
     'css/main.css',
+    'CNAME',
     'about.html',
+    'favicon.ico',
+    'images/tomato.svg',
+    'rss.xml',
+    'sitemap.xml',
     '2016/09/12/first-post.html'
   ].each do |p|
     file = "_site/#{p}"
