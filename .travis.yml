@@ -9,5 +9,4 @@ install:
   - travis_retry bundle install
 script:
   - rake
-  - scss-lint -c .scss-lint.yml
 
