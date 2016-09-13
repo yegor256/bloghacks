@@ -5,6 +5,11 @@ cache: bundler
 branches:
   only:
     - master
+addons:
+  apt:
+    packages:
+      - aspell
+      - aspell-en
 install:
   - travis_retry bundle install
 script:

@@ -6,13 +6,16 @@ require 'tempfile'
 require 'rake/clean'
 require 'scss_lint/rake_task'
 require 'w3c_validators'
+require 'nokogiri'
+require 'spellchecker'
 
 task default: [:clean, :build, :scss_lint, :pages]
 
 desc "Lint SASS sources"
 SCSSLint::RakeTask.new do |t|
   f = Tempfile.new(['bloghacks-', '.scss'])
-  f.write File.open('css/main.scss').drop(2).join("\n")
+  f << File.open('css/main.scss').drop(2).join("\n")
+  f.flush
   f.close
   t.files = Dir.glob([f.path])
 end
@@ -38,6 +41,7 @@ task :pages => [:build] do
   ].each do |p|
     file = "_site/#{p}"
     raise "Page #{file} is not found" unless File.exists? file
+    puts "Page #{file} is in place"
   end
 end
 
@@ -59,5 +63,24 @@ task :w3c => [:build] do
       raise "Page #{file} is not W3C compliant"
     end
     puts "Page #{p} is W3C compliant"
+  end
+end
+
+desc "Check spelling in all HTML pages"
+task :spell => [:build] do
+  Dir["_site/**/*.html"].each do |f|
+    html = Nokogiri::HTML(File.read(f))
+    html.search('//code').remove
+    html.search('//script').remove
+    html.search('//pre').remove
+    html.search('//header').remove
+    html.search('//footer').remove
+    tmp = Tempfile.new(['bloghacks-', '.txt'])
+    tmp << html.xpath('/html/body/section').text
+    tmp.flush
+    tmp.close
+    stdout = `cat "#{tmp.path}" | aspell -a --lang=en_US --ignore=2 --ignore-case -p ./_rake/aspell.en.pws | grep ^\\&`
+    raise "Typos at #{f}:\n#{stdout}" if !stdout.empty?
+    puts "Spell check passed, no typos at #{f}"
   end
 end
