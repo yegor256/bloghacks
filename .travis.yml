@@ -1,3 +1,5 @@
+# More about this file: https://docs.travis-ci.com/user/customizing-the-build
+
 language: ruby
 sudo: false
 rvm:
