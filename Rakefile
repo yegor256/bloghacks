@@ -1,9 +1,11 @@
 # encoding: utf-8
+
 require 'rubygems'
 require 'rake'
 require 'tempfile'
 require 'rake/clean'
 require 'scss_lint/rake_task'
+
 task default: [:clean, :build, :scss_lint, :pages]
 
 desc "Lint SASS sources"
