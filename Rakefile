@@ -9,7 +9,7 @@ require 'w3c_validators'
 require 'nokogiri'
 require 'spellchecker'
 
-task default: [:clean, :build, :scss_lint, :pages]
+task default: [:clean, :build, :scss_lint, :pages, :spell]
 
 desc "Lint SASS sources"
 SCSSLint::RakeTask.new do |t|
