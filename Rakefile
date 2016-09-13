@@ -7,8 +7,10 @@ task default: [:clean, :build, :scss_lint]
 
 desc "Lint SASS sources"
 SCSSLint::RakeTask.new do |t|
-  t.name = 'scss_lint'
-  t.files = ['css']
+  f = Tempfile.new(['bloghacks-', '.scss'])
+  f.write File.open('css/main.scss').drop(2).join("\n")
+  f.close
+  t.files = Dir.glob([f.path])
 end
 
 desc "Build Jekyll site"
