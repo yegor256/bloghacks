@@ -35,17 +35,7 @@ end
 
 desc 'Check the existence of all critical pages'
 task pages: [:build] do
-  [
-    'robots.txt',
-    'css/main.css',
-    'CNAME',
-    'about.html',
-    'favicon.ico',
-    'images/tomato.svg',
-    'rss.xml',
-    'sitemap.xml',
-    '2016/09/12/first-post.html'
-  ].each do |p|
+  File.open('_rake/pages.txt').map(&:strip).each do |p|
     file = "_site/#{p}"
     fail "Page #{file} is not found" unless File.exist? file
     puts "#{file}: OK"
