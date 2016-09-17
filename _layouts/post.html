@@ -3,9 +3,12 @@ layout: default
 ---
 
 <article itemscope="" itemtype="http://schema.org/BlogPosting">
-  <meta itemprop="author publisher" content="Yegor Bugayenko"/>
-  <meta itemprop="publisher.logo" content="/images/tomato.svg"/>
   <meta itemprop="image" content="/images/tomato.svg"/>
+  <meta itemprop="author publisher" content="Yegor Bugayenko"/>
+  <div itemprop="publisher">
+    <meta itemprop="name" content="Yegor Bugayenko"/>
+    <meta itemprop="logo" content="/images/tomato.svg"/>
+  </div>
   <p>
     <span itemprop="datePublished dateModified" datetime="{{ page.date | date_to_xmlschema }}">
       {{ page.date | date: "%B %-d, %Y" }}
