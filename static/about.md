@@ -2,6 +2,13 @@
 layout: page
 title: About
 permalink: /about.html
+description: |
+  This page explains what this blog is
+  about and gives other information.
+keywords:
+  - demo blog
+  - bloghacks
+  - 256 bloghacks
 ---
 
 Yegor Bugayenko ([`@yegor256`](https://github.com/yegor256)) is the author of this
