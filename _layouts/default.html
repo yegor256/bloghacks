@@ -26,7 +26,7 @@
           <ul>
             <li><a href="https://twitter.com/intent/follow?screen_name=yegor256">Twitter</a></li>
             <li><a href="{{ "/feed.xml" | prepend: site.baseurl }}">RSS</a></li>
-            <li><a href="mailto:me@yegor256.com">me@yegor256.com</a></li>
+            <li><a href="mailto:me@yegor256.com" itemprop="email">me@yegor256.com</a></li>
           </ul>
         </nav>
         <form method="get" action="https://www.google.com/search">
@@ -36,7 +36,7 @@
       </header>
       {{ content }}
       <footer>
-        (c) Yegor Bugayenko<br/>
+        (c) <span itemprop="author">Yegor Bugayenko</span><br/>
         2016
       </footer>
     </section>
