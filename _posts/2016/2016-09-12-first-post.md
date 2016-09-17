@@ -1,7 +1,15 @@
 ---
 layout: post
-title: "First post"
 date: 2016-09-12
+title: "First post"
+description: |
+  This is the first post in this demo
+  blog; it should help you understand
+  how post should be formatted.
+keywords:
+  - demo blog
+  - bloghacks
+  - 256 bloghacks
 categories: mood
 ---
 
