@@ -14,6 +14,11 @@ author:
 encoding: utf-8
 timezone: America/San_Francisco
 permalink: :year/:month/:day/:title.html
+exclude:
+  - README.md
+  - Gemfile.lock
+  - Gemfile
+  - Rakefile
 
 gems:
   - jekyll-feed

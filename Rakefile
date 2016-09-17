@@ -11,7 +11,11 @@ require 'rubocop/rake_task'
 require 'English'
 require 'net/http'
 
-task default: [:clean, :build, :scss_lint, :pages, :spell, :ping, :rubocop]
+task default: [
+  :clean, :build, :scss_lint,
+  :pages, :garbage,
+  :spell, :ping, :rubocop
+]
 
 def done(msg)
   puts msg + "\n\n"
@@ -41,6 +45,16 @@ task pages: [:build] do
     puts "#{file}: OK"
   end
   done 'All files are in place'
+end
+
+desc 'Check the absence of garbage'
+task garbage: [:build] do
+  File.open('_rake/garbage.txt').map(&:strip).each do |p|
+    file = "_site/#{p}"
+    fail "Page #{file} is still there" if File.exist? file
+    puts "#{file}: absent, OK"
+  end
+  done 'There is no garbage'
 end
 
 desc 'Validate a few pages for W3C compliance'
