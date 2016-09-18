@@ -10,10 +10,11 @@ require 'nokogiri'
 require 'rubocop/rake_task'
 require 'English'
 require 'net/http'
+require 'html-proofer'
 
 task default: [
   :clean, :build, :scss_lint,
-  :pages, :garbage,
+  :pages, :garbage, :proofer,
   :spell, :ping, :rubocop
 ]
 
@@ -77,6 +78,12 @@ task w3c: [:build] do
     puts "#{p}: OK"
   end
   done 'HTML is W3C compliant'
+end
+
+desc 'Validate a few pages through HTML proofer'
+task proofer: [:build] do
+  HTMLProofer.check_directory('_site', log_level: :warn).run
+  done 'HTML passed through html-proofer'
 end
 
 desc 'Check spelling in all HTML pages'
