@@ -22,6 +22,12 @@ def done(msg)
   puts msg + "\n\n"
 end
 
+desc 'Delete _site directory'
+task :clean do
+  rm_rf '_site'
+  done 'Jekyll site directory deleted'
+end
+
 desc 'Lint SASS sources'
 SCSSLint::RakeTask.new do |t|
   f = Tempfile.new(['bloghacks-', '.scss'])
@@ -33,9 +39,13 @@ end
 
 desc 'Build Jekyll site'
 task :build do
-  system('jekyll build')
-  fail 'Jekyll failed' unless $CHILD_STATUS.success?
-  done 'Jekyll site generated without issues'
+  if File.exist? '_site'
+    done 'Jekyll site already exists in _site'
+  else
+    system('jekyll build')
+    fail 'Jekyll failed' unless $CHILD_STATUS.success?
+    done 'Jekyll site generated without issues'
+  end
 end
 
 desc 'Check the existence of all critical pages'
@@ -82,7 +92,12 @@ end
 
 desc 'Validate a few pages through HTML proofer'
 task proofer: [:build] do
-  HTMLProofer.check_directory('_site', log_level: :warn).run
+  HTMLProofer.check_directory(
+    '_site',
+    log_level: :warn,
+    check_favicon: true,
+    check_html: true
+  ).run
   done 'HTML passed through html-proofer'
 end
 
