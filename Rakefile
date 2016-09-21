@@ -117,15 +117,16 @@ task spell: [:build] do
     html.search('//pre').remove
     html.search('//header').remove
     html.search('//footer').remove
+    text = html.xpath('/html/body/section//p').text
     tmp = Tempfile.new(['bloghacks-', '.txt'])
-    tmp << html.xpath('/html/body/section').text
+    tmp << text
     tmp.flush
     tmp.close
     stdout = `cat "#{tmp.path}" \
       | aspell -a --lang=en_US -W 2 --ignore-case -p ./_rake/aspell.en.pws \
       | grep ^\\&`
     fail "Typos at #{f}:\n#{stdout}" unless stdout.empty?
-    puts "#{f}: OK"
+    puts "#{f}: OK (#{text.split(/\s/).size} words)"
   end
   done 'No spelling errors'
 end
