@@ -13,9 +13,16 @@ require 'net/http'
 require 'html-proofer'
 
 task default: [
-  :clean, :build, :scss_lint,
-  :pages, :garbage, :proofer,
-  :spell, :ping, :rubocop
+  :clean,
+  :build,
+  :scss_lint,
+  :pages,
+  :garbage,
+  :proofer,
+  :spell,
+  :ping,
+  :orphans,
+  :rubocop
 ]
 
 def done(msg)
@@ -138,6 +145,34 @@ task ping: [:build] do
     fail "URI #{uri} is not OK" unless data.code == '200'
   end
   done 'All links are valid'
+end
+
+desc 'Make sure there are no orphan articles'
+task orphans: [:build] do
+  links = Dir['_site/**/*.html'].reduce([]) do |array, f|
+    array + Nokogiri::HTML(File.read(f)).xpath('//a/@href').to_a.map(&:to_s)
+  end
+  links = links
+    .map { |a| a.gsub(/^\//, 'http://bloghacks.yegor256.com/') }
+    .reject { |a| !a.start_with? 'http://bloghacks.yegor256.com/' }
+    .map { |a| a.gsub(/#.*/, '') }
+  links += Dir['_site/**/*.html']
+    .map { |f| f.gsub(/_site/, 'http://bloghacks.yegor256.com') }
+  counts = {}
+  links
+    .reject { |a| !a.match %r{.*/[0-9]{4}/[0-9]{2}/[0-9]{2}/.*} }
+    .group_by(&:itself).each { |k, v| counts[k] = v.length }
+  orphans = 0
+  counts.each do |k, v|
+    if v < 3
+      puts "#{k} is an orphan (#{v})"
+      orphans += 1
+    else
+      puts "#{k}: #{v}"
+    end
+  end
+  fail "There are #{orphans} orphans" unless orphans == 0
+  done "There are no orphans in #{links.size} links"
 end
 
 desc 'Run RuboCop on all Ruby files'
