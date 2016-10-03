@@ -19,6 +19,7 @@ exclude:
   - Gemfile.lock
   - Gemfile
   - Rakefile
+  - LICENSE.txt
 
 gems:
   - jekyll-feed

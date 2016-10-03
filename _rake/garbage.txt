@@ -1,3 +1,4 @@
 Rakefile
 Gemfile
 README.md
+LICENSE.txt
