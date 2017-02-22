@@ -2,6 +2,8 @@
 
 Check us at [bloghacks.yegor256.com](http://bloghacks.yegor256.com).
 
+The "256 Bloghacks" book is [here](http://www.yegor256.com/256-bloghacks.html).
+
 ## License
 
 Copyright (c) 2016 Yegor Bugayenko
