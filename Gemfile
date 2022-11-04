@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.2'
+ruby '2.7.6'
 
 gem 'github-pages', '96', group: :jekyll_plugins
 gem 'rake', '10.4.2'
