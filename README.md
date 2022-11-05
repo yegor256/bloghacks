@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/yegor256/bloghacks.svg?branch=master)](https://travis-ci.org/yegor256/bloghacks)
+[![jekyll](https://github.com/yegor256/bloghacks/actions/workflows/jekyll.yml/badge.svg)](https://github.com/yegor256/bloghacks/actions/workflows/jekyll.yml)
 
 Check us at [bloghacks.yegor256.com](http://bloghacks.yegor256.com).
 
@@ -6,7 +6,7 @@ The "256 Bloghacks" book is [here](http://www.yegor256.com/256-bloghacks.html).
 
 ## License
 
-Copyright (c) 2016 Yegor Bugayenko
+Copyright (c) 2016-2022 Yegor Bugayenko
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the 'Software'), to deal
