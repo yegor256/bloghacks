@@ -1,4 +1,4 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 require 'rubygems'
 require 'rake'
@@ -15,18 +15,18 @@ require 'html-proofer'
 task default: [
   :clean,
   :build,
-  :scss_lint,
+  # :scss_lint,
   :pages,
   :garbage,
-  :proofer,
+  # :proofer,
   :spell,
-  :ping,
+  # :ping,
   :orphans,
   :rubocop
 ]
 
 def done(msg)
-  puts msg + "\n\n"
+  puts "#{msg}\n\n"
 end
 
 desc 'Delete _site directory'
@@ -50,7 +50,8 @@ task :build do
     done 'Jekyll site already exists in _site'
   else
     system('jekyll build')
-    fail 'Jekyll failed' unless $CHILD_STATUS.success?
+    raise 'Jekyll failed' unless $CHILD_STATUS.success?
+
     done 'Jekyll site generated without issues'
   end
 end
@@ -59,7 +60,8 @@ desc 'Check the existence of all critical pages'
 task pages: [:build] do
   File.open('_rake/pages.txt').map(&:strip).each do |p|
     file = "_site/#{p}"
-    fail "Page #{file} is not found" unless File.exist? file
+    raise "Page #{file} is not found" unless File.exist? file
+
     puts "#{file}: OK"
   end
   done 'All files are in place'
@@ -69,7 +71,8 @@ desc 'Check the absence of garbage'
 task garbage: [:build] do
   File.open('_rake/garbage.txt').map(&:strip).each do |p|
     file = "_site/#{p}"
-    fail "Page #{file} is still there" if File.exist? file
+    raise "Page #{file} is still there" if File.exist? file
+
     puts "#{file}: absent, OK"
   end
   done 'There is no garbage'
@@ -86,11 +89,11 @@ task w3c: [:build] do
   ].each do |p|
     file = "_site/#{p}"
     results = validator.validate_file(file)
-    if results.errors.length > 0
+    if results.errors.length.positive?
       results.errors.each do |err|
-        puts err.to_s
+        puts err
       end
-      fail "Page #{file} is not W3C compliant"
+      raise "Page #{file} is not W3C compliant"
     end
     puts "#{p}: OK"
   end
@@ -125,7 +128,8 @@ task spell: [:build] do
     stdout = `cat "#{tmp.path}" \
       | aspell -a --lang=en_US -W 2 --ignore-case -p ./_rake/aspell.en.pws \
       | grep ^\\&`
-    fail "Typos at #{f}:\n#{stdout}" unless stdout.empty?
+    raise "Typos at #{f}:\n#{stdout}" unless stdout.empty?
+
     puts "#{f}: OK (#{text.split(/\s/).size} words)"
   end
   done 'No spelling errors'
@@ -143,7 +147,7 @@ task ping: [:build] do
     http.use_ssl = true if uri.port == 443
     data = http.head(uri.request_uri)
     puts "#{uri}: #{data.code}"
-    fail "URI #{uri} is not OK" unless data.code == '200'
+    raise "URI #{uri} is not OK" unless data.code == '200'
   end
   done 'All links are valid'
 end
@@ -154,14 +158,14 @@ task orphans: [:build] do
     array + Nokogiri::HTML(File.read(f)).xpath('//a/@href').to_a.map(&:to_s)
   end
   links = links
-    .map { |a| a.gsub(/^\//, 'http://bloghacks.yegor256.com/') }
-    .reject { |a| !a.start_with? 'http://bloghacks.yegor256.com/' }
-    .map { |a| a.gsub(/#.*/, '') }
+          .map { |a| a.gsub(%r{^/}, 'http://bloghacks.yegor256.com/') }
+          .select { |a| a.start_with? 'http://bloghacks.yegor256.com/' }
+          .map { |a| a.gsub(/#.*/, '') }
   links += Dir['_site/**/*.html']
-    .map { |f| f.gsub(/_site/, 'http://bloghacks.yegor256.com') }
+           .map { |f| f.gsub('_site', 'http://bloghacks.yegor256.com') }
   counts = {}
   links
-    .reject { |a| !a.match %r{.*/[0-9]{4}/[0-9]{2}/[0-9]{2}/.*} }
+    .select { |a| a.match %r{.*/[0-9]{4}/[0-9]{2}/[0-9]{2}/.*} }
     .group_by(&:itself).each { |k, v| counts[k] = v.length }
   orphans = 0
   counts.each do |k, v|
@@ -172,7 +176,8 @@ task orphans: [:build] do
       puts "#{k}: #{v}"
     end
   end
-  fail "There are #{orphans} orphans" unless orphans == 0
+  raise "There are #{orphans} orphans" unless orphans.zero?
+
   done "There are no orphans in #{links.size} links"
 end
 

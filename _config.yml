@@ -21,7 +21,7 @@ exclude:
   - Rakefile
   - LICENSE.txt
 
-gems:
+plugins:
   - jekyll-feed
   - jekyll-paginate
   - jekyll-sitemap

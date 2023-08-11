@@ -14,7 +14,7 @@ categories: mood
 ---
 
 This is my **first** blog post on this demo blog. Don't
-take it serious. My _real_ blog is [here](http://www.yegor256.com).
+take it serious. My _real_ blog is [here](https://www.yegor256.com).
 This blog is designed in order to demonstrate how GitHub Pages
 can be used to host "static blogs". In my opinion, this is the
 best platform on the market now for blog hosting.

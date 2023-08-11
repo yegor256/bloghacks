@@ -1,8 +1,8 @@
 [![jekyll](https://github.com/yegor256/bloghacks/actions/workflows/jekyll.yml/badge.svg)](https://github.com/yegor256/bloghacks/actions/workflows/jekyll.yml)
 
-Check us at [bloghacks.yegor256.com](http://bloghacks.yegor256.com).
+Check us at [bloghacks.yegor256.com](https://bloghacks.yegor256.com).
 
-The "256 Bloghacks" book is [here](http://www.yegor256.com/256-bloghacks.html).
+The "256 Bloghacks" book is [here](https://www.yegor256.com/256-bloghacks.html).
 
 ## License
 
