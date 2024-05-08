@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'github-pages', '228', group: :jekyll_plugins
-gem 'html-proofer', '5.0.8'
+gem 'html-proofer', '5.0.9'
 gem 'rake', '13.0.6'
 gem 'rubocop', '1.56.0'
 gem 'rubocop-rspec', '2.23.2'
