@@ -41,7 +41,7 @@ end
 desc 'Lint SASS sources'
 SCSSLint::RakeTask.new do |t|
   f = Tempfile.new(['bloghacks-', '.scss'])
-  f << File.open('css/main.scss').drop(2).join("\n")
+  f << File.readlines('css/main.scss').drop(2).join("\n")
   f.flush
   f.close
   t.files = Dir.glob([f.path])
@@ -61,7 +61,7 @@ end
 
 desc 'Check the existence of all critical pages'
 task pages: [:build] do
-  File.open('_rake/pages.txt').map(&:strip).each do |p|
+  File.readlines('_rake/pages.txt').map(&:strip).each do |p|
     file = "_site/#{p}"
     raise "Page #{file} is not found" unless File.exist? file
 
@@ -72,7 +72,7 @@ end
 
 desc 'Check the absence of garbage'
 task garbage: [:build] do
-  File.open('_rake/garbage.txt').map(&:strip).each do |p|
+  File.readlines('_rake/garbage.txt').map(&:strip).each do |p|
     file = "_site/#{p}"
     raise "Page #{file} is still there" if File.exist? file
 
@@ -85,6 +85,7 @@ desc 'Validate a few pages for W3C compliance'
 # It doesn't work now, because of: https://github.com/alexdunae/w3c_validators/issues/16
 task w3c: [:build] do
   include W3CValidators
+
   validator = MarkupValidator.new
   [
     'index.html',
