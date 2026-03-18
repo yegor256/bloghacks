@@ -9,7 +9,7 @@ gem 'github-pages', '232', group: :jekyll_plugins
 gem 'html-proofer', '5.2.0'
 gem 'rake', '13.3.1'
 gem 'rubocop', '1.85.1'
-gem 'rubocop-factory_bot', '2.25.1'
+gem 'rubocop-factory_bot', '2.28.0'
 gem 'rubocop-rspec', '3.9.0'
 gem 'scss_lint', '0.60.0'
 gem 'w3c_validators', '1.3.7'
