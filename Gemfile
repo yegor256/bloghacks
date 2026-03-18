@@ -6,7 +6,7 @@ source 'https://rubygems.org'
 
 gem 'github-pages', '232', group: :jekyll_plugins
 gem 'html-proofer', '5.0.8'
-gem 'rake', '13.0.6'
+gem 'rake', '13.3.1'
 gem 'rubocop', '1.56.0'
 gem 'rubocop-rspec', '3.9.0'
 gem 'scss_lint', '0.60.0'
