@@ -1,4 +1,6 @@
 ---
+# SPDX-FileCopyrightText: Copyright (c) 2016-2026 Yegor Bugayenko
+# SPDX-License-Identifier: MIT
 layout: post
 date: 2016-09-12
 title: "First post"

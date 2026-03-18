@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: Copyright (c) 2016-2026 Yegor Bugayenko
+# SPDX-License-Identifier: MIT
+
+version = 1
+[[annotations]]
+path = [
+    ".DS_Store",
+    "**.gif",
+    "**.png",
+    "**.svg",
+    "**.ico",
+    ".gitignore",
+    "aspell.en.pws",
+    "CNAME",
+    "robots.txt",
+    "Gemfile.lock",
+    "README.md",
+    "renovate.json",
+    "_rake/aspell.en.pws",
+    "_rake/garbage.txt",
+    "_rake/pages.txt"
+]
+precedence = "override"
+SPDX-FileCopyrightText = "Copyright (c) 2016-2026 Yegor Bugayenko"
+SPDX-License-Identifier = "MIT"

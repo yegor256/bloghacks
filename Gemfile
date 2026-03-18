@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+# SPDX-FileCopyrightText: Copyright (c) 2016-2026 Yegor Bugayenko
+# SPDX-License-Identifier: MIT
 
 source 'https://rubygems.org'
 
@@ -9,4 +11,4 @@ gem 'rubocop', '1.56.0'
 gem 'rubocop-rspec', '2.23.2'
 gem 'scss_lint', '0.60.0'
 gem 'w3c_validators', '1.3.7'
-gem 'webrick', 'v1.8.1'
+gem 'webrick', '1.8.1'
