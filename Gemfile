@@ -8,7 +8,7 @@ source 'https://rubygems.org'
 gem 'github-pages', '232', group: :jekyll_plugins
 gem 'html-proofer', '5.2.1'
 gem 'rake', '13.4.2'
-gem 'rubocop', '1.87.0'
+gem 'rubocop', '1.88.0'
 gem 'rubocop-factory_bot', '2.28.0'
 gem 'rubocop-rspec', '3.10.2'
 gem 'scss_lint', '0.60.0'
