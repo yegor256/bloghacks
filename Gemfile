@@ -5,7 +5,7 @@
 
 source 'https://rubygems.org'
 
-gem 'github-pages', '232', group: :jekyll_plugins
+gem 'github-pages', '233', group: :jekyll_plugins
 gem 'html-proofer', '5.2.1'
 gem 'rake', '13.4.2'
 gem 'rubocop', '1.88.0'
